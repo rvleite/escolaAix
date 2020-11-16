@@ -20,11 +20,6 @@
             @csrf
 
             <div class="form-group">
-                <label>Curso</label>
-                <input type="text" class="form-control" name="name" id="name">
-            </div>
-
-            <div class="form-group">
                 <label>Nome do curso</label>
                 <input type="nomecurso" class="form-control" name="nomecurso" id="nomecurso">
             </div>
@@ -34,17 +29,7 @@
                 <input type="text" class="form-control" name="codigoCurso" id="codigoCurso">
             </div>
 
-            <div class="form-group">
-                <label>Subject</label>
-                <input type="text" class="form-control" name="subject" id="subject">
-            </div>
-
-            <div class="form-group">
-                <label>Message</label>
-                <textarea class="form-control" name="message" id="message" rows="4"></textarea>
-            </div>
-
-            <input type="submit" name="send" value="Submit" class="btn btn-dark btn-block">
+            <input type="submit" name="send" value="Salvar Curso" class="btn btn-dark btn-block">
         </form>
     </div>
    

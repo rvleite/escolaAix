@@ -21,7 +21,6 @@ class CursosController extends Controller
     public function index()
     {
        
-
          return view('curso.home');
     }
 
@@ -32,7 +31,16 @@ class CursosController extends Controller
      */
     public function create()
     {
-        //
+        
+        $nome = $_POST['nomecurso'];
+        $codigo = $_POST['codigoCurso'];
+
+        DB::insert('insert into cursos (nome, codigo) values (?, ?)', [$nome, $codigo]);
+
+        return redirect()
+        ->back()
+        ->with('success', 'OS cursos foram adicionado com sucesso!');
+
     }
 
     /**
@@ -54,7 +62,7 @@ class CursosController extends Controller
      */
     public function show(Cursos $cursos)
     {
-        //
+        return view('curso.showcursos');
     }
 
     /**

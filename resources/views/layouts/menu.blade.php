@@ -15,6 +15,11 @@
         <i class="nav-icon fas fa-graduation-cap"></i>
         <p>Cadastrar Curso</p>
     </a>
+<!-- Listar alunos Curso -->
+     <a href="{{ route('ShowCurso') }}" class="nav-link active">
+        <i class="nav-icon fas fa-list"></i>
+        <p>Listar Cursos</p>
+    </a>
 <!-- Cadastrar Alunos -->
     <a href="{{ route('CadAluno') }}" class="nav-link active">
         <i class="nav-icon fas fa-pencil-alt"></i>

@@ -18,14 +18,21 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+        <a href="{{ url('/home') }}">
+            <div class="card-header mx-auto bg-dark">
+                <span> <img src="assets/img/logo.png" class="w-75" alt="Logo"> </span><br/>
+                <span class="logo_title mt-5"> Logar Dashboard </span>
+            </div>
+        </a>
+
+        </div>
     </div>
     <!-- /.login-logo -->
 
     <!-- /.login-box-body -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Entra para iniciar sua sessão</p>
 
             <form method="post" action="{{ url('/login') }}">
                 @csrf
@@ -64,7 +71,7 @@
                     <div class="col-8">
                         <div class="icheck-primary">
                             <input type="checkbox" id="remember">
-                            <label for="remember">Remember Me</label>
+                            <label for="remember">Lembrar-me</label>
                         </div>
                     </div>
 
@@ -76,7 +83,7 @@
             </form>
 
             <p class="mb-1">
-                <a href="{{ route('password.request') }}">I forgot my password</a>
+                <a href="{{ route('password.request') }}">Esqueci a minha senha</a>
             </p>
             <p class="mb-0">
                 <a href="{{ route('register') }}" class="text-center">Registra um novo usuário</a>
