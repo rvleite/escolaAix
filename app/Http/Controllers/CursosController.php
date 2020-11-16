@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Alunos;
+use App\Models\Cursos;
 use Illuminate\Http\Request;
+use DB;
 
-class AlunosController extends Controller
+class CursosController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,10 +20,9 @@ class AlunosController extends Controller
      */
     public function index()
     {
-        //$users = DB::select('select * from users where active = ?', [1]);
+       
 
-        return view('alunos.home');
-
+         return view('curso.home');
     }
 
     /**
@@ -27,7 +32,7 @@ class AlunosController extends Controller
      */
     public function create()
     {
-        return view('alunos.create');
+        //
     }
 
     /**
@@ -44,10 +49,10 @@ class AlunosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Alunos  $alunos
+     * @param  \App\Models\Cursos  $cursos
      * @return \Illuminate\Http\Response
      */
-    public function show(Alunos $alunos)
+    public function show(Cursos $cursos)
     {
         //
     }
@@ -55,10 +60,10 @@ class AlunosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Alunos  $alunos
+     * @param  \App\Models\Cursos  $cursos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Alunos $alunos)
+    public function edit(Cursos $cursos)
     {
         //
     }
@@ -67,10 +72,10 @@ class AlunosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Alunos  $alunos
+     * @param  \App\Models\Cursos  $cursos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Alunos $alunos)
+    public function update(Request $request, Cursos $cursos)
     {
         //
     }
@@ -78,10 +83,10 @@ class AlunosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Alunos  $alunos
+     * @param  \App\Models\Cursos  $cursos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Alunos $alunos)
+    public function destroy(Cursos $cursos)
     {
         //
     }
