@@ -41,13 +41,16 @@ class AlunosController extends Controller
     public function store(Request $request)
     {
         //convert a data no formato do BD
-        $request["inputMatricula"] = date("Y-m-d H:i:s",strtotime($request->inputMatricula));
-
+        $request['inputMatricula'] = date("Y-m-d H:i:s",strtotime(str_replace('/', '-', $request->inputMatricula)));
+                
         
-        if($files=$request->file('fileToUpload')){
-            $name=$files->getClientOriginalName();
-            $files->move('file',$name);
-        }
+        $target_dir = "/";
+        //$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        $target_file = basename($_FILES["fileToUpload"]["name"]);
+
+    
+        $request["file"] = $target_file;
+
 
         // inseri no Bd os dadaso do aluno
         Alunos::create($request->all());
@@ -64,7 +67,7 @@ class AlunosController extends Controller
      */
     public function show(Alunos $id)
     {
-        dd($id);
+        //dd($id);
         $alunos = Alunos::pluck('name','codigocurso','motivo','inputCEP','inputAddress','bairro','complemento','inputCity','inputEstado','inputCurso','inputTurma','inputMatricula', 'file')->toArray();
 
         return view('alunos.showcursos',['alunos' => $alunos]);
@@ -76,17 +79,12 @@ class AlunosController extends Controller
      * @param  \App\Models\Alunos  $alunos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Alunos $id)
+    public function edit($id)
     {
-        
-        $user = Alunos::find($id);
-        $roles = Alunos::pluck('name','codigocurso','motivo','inputCEP','inputAddress','bairro','complemento','inputCity','inputEstado','inputCurso','inputTurma','inputMatricula', 'file');
-        
-        dd($roles);
-        
-        
-        
-       // return view('curso.editcurso',compact('name','codigocurso','motivo','inputCEP','inputAddress','bairro','complemento','inputCity','inputEstado','inputCurso','inputTurma','inputMatricula', 'file'));
+        //dd($id);
+        $alunos = DB::table('alunos')->find($id);
+                
+        return view('alunos.edit',['alunos' => $alunos]);
     }
 
     /**
@@ -98,7 +96,10 @@ class AlunosController extends Controller
      */
     public function update(Request $request, Alunos $alunos)
     {
-        dd($request);
+        
+        $request['inputMatricula'] = date("Y-m-d H:i:s",strtotime(str_replace('/', '-', $request->inputMatricula)));
+
+        
         request()->validate([
             'id' => 'required',
             'nome' => 'required',
@@ -113,8 +114,7 @@ class AlunosController extends Controller
             'inputEstado' => 'required',
             'inputCurso' => 'required',
             'inputTurma' => 'required',
-            'inputMatricula' => 'required',
-             'file' => 'required',
+            'inputMatricula' => 'required'
         ]);
 
         $alunos->update($request->all());

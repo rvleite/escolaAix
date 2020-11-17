@@ -1,0 +1,12 @@
+const valores = Array(10,11,16,20,54,22,8,2);
+//total inicializa com 1
+let total = 1;
+
+for(let index = 0; index < valores.length; index++){
+const element = valores[index];
+//o calculo e feito com a varial element
+    if(element % 3 === 0){
+        total+=element;
+    }
+}
+console.log("Total: " +total);
