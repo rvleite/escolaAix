@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cursos;
 use Illuminate\Http\Request;
 use DB;
+use Datatables;
 
 class CursosController extends Controller
 {
@@ -62,7 +63,19 @@ class CursosController extends Controller
      */
     public function show(Cursos $cursos)
     {
-        return view('curso.showcursos');
+       
+       // $cursos =  Datatables::of(Cursos::query())->make(true);
+        //dd($cursos);
+
+        //return Datatables::of($cursos)->make();
+        //return view('curso.showcursos',compact('cursos'));
+
+        
+        $cursos = Cursos::pluck('nome', 'codigo')->toArray();
+
+        return view('curso.showcursos',['cursos' => $cursos]);
+
+        
     }
 
     /**
@@ -71,9 +84,21 @@ class CursosController extends Controller
      * @param  \App\Models\Cursos  $cursos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cursos $cursos)
+    public function edit( Cursos $codigo)
     {
-        //
+        //dd($codigo);
+        $user = Cursos::find($codigo);
+        $roles = Cursos::pluck('nome','codigo');
+        
+        
+        foreach ($roles as $key => $value) {
+            $codigo = $key;
+            $nome = $value;
+        }
+        
+        
+        return view('curso.editcurso',compact('roles', 'nome', 'codigo'));
+
     }
 
     /**
@@ -83,9 +108,19 @@ class CursosController extends Controller
      * @param  \App\Models\Cursos  $cursos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cursos $cursos)
+    public function update( Cursos $cursos)
     {
-        //
+        
+        request()->validate([
+            'nome' => 'required',
+            'codigo' => 'required',
+        ]);
+
+        $cursos->update($request->all());
+    
+        return redirect()
+        ->back()
+        ->with('success', 'O curso foi editador com sucesso!');
     }
 
     /**
@@ -94,8 +129,12 @@ class CursosController extends Controller
      * @param  \App\Models\Cursos  $cursos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cursos $cursos)
+    public function destroy( $codigo)
     {
-        //
+        
+        DB::table("cursos")->where('codigo',$codigo)->delete();
+        return redirect()
+        ->back()
+        ->with('success', 'O curso foi deletado com sucesso!');
     }
 }
